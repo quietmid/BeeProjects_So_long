@@ -6,14 +6,13 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:44 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/11 17:18:25 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/13 19:34:16 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_
-
+/* IT OPENS UP A WINDOW HERE!
 int	main(void)
 {
 	void	*mlx_ptr;
@@ -34,4 +33,29 @@ int	main(void)
 	mlx_loop(mlx_ptr);
 	mlx_terminate(mlx_ptr);
 	return (0);
-}	
+}
+*/
+int	is_ber(char *file)
+{
+	int	len;
+
+	len = ft_strlen(file);
+	if (file == 0)
+		return (0);
+	if (len < 5)
+		return (0);
+	if (!(ft_strnstr(file, ".ber", len)))
+		return (0);
+	return (1);
+}
+
+int	main(int argc, char *argv[])
+{
+	char **map;
+
+	map = NULL;
+	if (argc != 2)
+		error_msg_params("Only two arguments", map);
+	
+	map = get_map_str()// check and create map
+}

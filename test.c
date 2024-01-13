@@ -80,3 +80,8 @@ int32_t main(int32_t argc, const char* argv[])
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
+
+
+/*
+	to compile you need to add -Iinclude -lglfw -L"/Users/jlu/.brew/opt/glfw/lib/"
+*/

@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:33:31 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/11 18:30:56 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/13 18:45:23 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 // use GNL to get str to be read.
 
-static char	get_map_str(char *map_path)
+char	**get_map_str(int fd, char *map_path)
 {
 	int		fd;
-	char	*resu;
+	char	**resu;
 	char	*line;
 
+	resu = ft_strdup("");
+	line = get_next_line(fd);
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	resu = ft_strdup("");
-	line = get_next_line(fd);
 	while (line)
 	{
-		resu = ft_strjoin();
+		resu = ft_strjoin(resu, line); //resu is where joining the read 
+		free(line);
+		line = get_next_line(fd);
 	}
+	return (resu);
 }
 
 // check if the map is valid. If the map has other letters than 0, 1, C, E, P, B, then it is not a valid map. 
