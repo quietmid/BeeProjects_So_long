@@ -55,7 +55,8 @@ int	main(int argc, char *argv[])
 
 	map = NULL;
 	if (argc != 2)
-		error_msg_params("Only two arguments", map);
-	
-	map = get_map_str()// check and create map
+		error_msg_params("Only two arguments", map); // check for # arguments
+	if (is_ber(argv[1]) == 0)
+		error_msg_params("Not valid map file", map); // check map file
+	map = parse_map(argv[1])// check and create map
 }

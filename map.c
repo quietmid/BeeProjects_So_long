@@ -41,7 +41,11 @@ int	check_map_char(char c)
 	if (c == '0'|| c == '1'|| c == 'C' || c == 'E' || c == 'P' || c == 'B')
 		return (1);
 }
-
+// in parse map, we do get map str first, then we check if the map is valid
+int	parse_map(char *file)
+{
+	
+}
 void	load_wall(t_game *game)
 {
 	mlx_texture_t *wall;
