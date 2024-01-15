@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/13 19:18:54 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/15 17:06:07 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,20 @@ typedef struct s_game
 {
 	void	*mlx_ptr; // MLX pointer
 	void	*win_ptr; // MLX window pointer
-	void	*player_ptr; // the pointer for the player	
-	void	*exit_ptr; // exit pointer
-	void	*wall_ptr; // the wall pointer
-	void	*chest_ptr;	// the chest pointer
-	void	*monster_ptr; // the pointer for monster 
+	t_coord	*player; // the player	
+	t_coord	*exit; // exit pointer
+	t_coord	*wall; // the wall pointer
+	t_coord	*chest;	// the chest pointer
+	t_coord	*monster; // the pointer for monster 
 	char	**map; // the map pointer 2D array
 	
 }		t_game;
+
+typedef struct s_map
+{
+	int	height;
+	int	width;
+}		t_map;
 
 int	error_msg_params(char *msg, char **map_str);
 

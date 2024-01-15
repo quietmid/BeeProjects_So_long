@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:44 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/13 19:34:16 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/15 15:53:24 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int	is_ber(char *file)
 
 int	main(int argc, char *argv[])
 {
-	char **map;
+	t_game	game;
 
-	map = NULL;
+	game.map = NULL;
 	if (argc != 2)
-		error_msg_params("Only two arguments", map); // check for # arguments
+		error_msg_params("Wrong number of arguments", game.map); // check # of argu
 	if (is_ber(argv[1]) == 0)
-		error_msg_params("Not valid map file", map); // check map file
-	map = parse_map(argv[1])// check and create map
+		error_msg_params("Not a valid map file", game.map); // check map file
+	game.map = parse_map(argv[1], game); // check and create map_str
 }
