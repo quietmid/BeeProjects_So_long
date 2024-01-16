@@ -6,91 +6,19 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:33:31 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/15 18:22:44 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/16 17:21:37 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// use GNL to get str to be read.
-
-char	**get_map_str(int fd, char *argv[1])
-{
-	int		i;
-	char	**resu;
-	char	*line;
-
-	fd = open(fd, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	line = get_next_line(fd);
-	if (!line)
-		return (NULL);
-	i = 0;
-	while (line != NULL)
-	{
-		resu[i] = ft_strdup(line); //resu is where joining the read 
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
-	close(fd);
-	return (resu);
-}
-
-
 // check if the map is valid. If the map has other letters than 0, 1, C, E, P, B, then it is not a valid map. 
 
 int	check_map_char(char c)
 {
-	if (c == '0'|| c == '1'|| c == 'C' || c == 'E' || c == 'P' || c == 'B')
+	if (c == '0'|| c == '1'|| c == 'C' || c == 'E' || c == 'P' || c == 'B' || c == '\n')
 		return (1);
-}
-void	check_map_vali_length(char **map, t_map *n_map)
-{
-	int	len;
-
-	n_map->height = 0;
-	if (map[n_map->height] != NULL)
-	{
-		len = ft_strlen(map[n_map->height]);
-		if (len < 3)
-			error_msg_params("Map too short", map);
-		n_map->width = len;
-		if (len != n_map->width)
-			error_msg_params("Map must be rectangular", map);
-		n_map->height++;
-	}
-	if ((n_map->height - 1) < 3)
-		error_msg_params("Map too short", map);
-}
-
-void	check_map_vali_content(char **map, t_game *game, t_map *n_map)
-{
-	int	x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (y < n_map->height)
-	{
-		while (x < n_map->width)
-		{
-			if (!check_map_char(map[y][x]))
-				error_msg_params("Invalid Map", map);
-			if (map[y][x] == 'C')
-				game->chest++;
-			else if (map[y][x] == 'P')
-				game->player++;
-			else if (map[y][x] == 'E')
-				game->exit++;
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	if (game->exit != 1 || game->player != 1 || game->chest < 1)
-		error_msg_params("Invalid Map", map);
+	return (0);
 }
 
 void	check_wall(char **map, t_map *n_map)
@@ -105,9 +33,9 @@ void	check_wall(char **map, t_map *n_map)
 		while (x < n_map->width)
 		{
 			if ((y == 0 || y == n_map->height - 1) && (map[y][x] != 1))
-				error_msg_params("Invalid Map, not surrounded by Wall", map);
+				error_msg_params("Invalid Map, not surrounded by Wall");
 			if ((x == 0 || x == n_map->width - 1) && (map[y][x] != 1))
-				error_msg_params("Invalid Map, not surrounded by Wall", map);
+				error_msg_params("Invalid Map, not surrounded by Wall");
 		x++;
 		}
 		x = 0;
@@ -115,37 +43,122 @@ void	check_wall(char **map, t_map *n_map)
 	}
 }
 
-int	parse_map(char *argv[], t_game *game)
+// check for map shape and also get its length and width
+void	check_map_len(char **map, t_map *dim)
 {
-	int		fd;
-	t_map	n_map;
+	size_t	len;
+	size_t	i;
 
-	fd = 0;
-	game->map = get_map_str(fd, argv[1]);
-	if (game->map == NULL)
-		error_msg_params("Empty Map", game->map);
-	check_map_vali_length(game->map, &n_map);
-	check_map_vali_cont(game->map, *game, &n_map);
-	check_wall(game->map, &n_map);
-	
+	i = 0;
+	len = ft_strlen(map[i]);
+	while (map[i] != NULL)
+	{
+		if (ft_strlen(map[i]) != len)
+			error_msg_params("Map is not a rectangle");
+		i++;
+	}
+	dim->width = len;
+	dim->height = i - 1;
+}
+// check for map content that only P,C,E,0,1 and \n is present in the map string
+
+void	check_map_content(char *map, t_game *game)
+{
+	int	i;
+
+	game->chest = 0;
+	game->exit = 0;
+	game->player = 0;
+	while (map[i++])
+	{
+		if (map[i] == 'P')
+			game->player++;
+		else if (map[i] == 'E')
+			game->exit++;
+		else if (map[i] == 'C')
+			game->chest++;
+		else if (map[i] != '0' && map[i] != '1' && map[i] != '\n')
+			error_msg_params("Invalid Map, Wrong Charater");
+	}
+	if (game->exit != 1 || game->player != 1 || game->chest < 1)
+		error_msg_params("Invalid Map, # of Player, chest, or exit is wrong");
 }
 
-//void	load_wall(t_game *game)
-//{
-//	mlx_texture_t *wall;
+// use GNL to get one giant str to be read.
 
-//	wall = mlx_load_png("assets/walls/wall_2.png");
-//	if (!wall)
-//		return (0); // image load fail
-	
+char	*get_map_str(char *mapfile)
+{
+	int		fd;
+	char	*resu;
+	char	*line;
+
+	fd = open(mapfile, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	resu = ft_calloc(1,1);
+	if (!resu)
+		return (NULL);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line)
+		{
+			resu = ft_strjoin(resu, line);
+			free(line);
+		}
+		else
+			break ;
+	}
+	close(fd);
+	return (resu);
+}
+
+t_game	*check_map(char *mapfile, t_game *game)
+{
+	char	*map_str;
+	char	**map_array;
+	t_game	*data;
+	t_map	*dim;
+
+	map_str = get_map_str(mapfile);
+	if (map_str == NULL)
+		error_msg_params("Empty Map");
+	check_map_content(map_str, game);
+	map_array = ft_split(map_str, '\n');
+	check_map_len(map_array, dim);
+	check_wall(game->map, &n_map);
+	return (data);
+}
+
+//int	main(int argc, char **argv)
+//{
+//	int	fd;
+//	char	**line;
+//	int	i;
+
+//	fd = open(argv[1], O_RDONLY);
+
+//	if (fd == -1)
+//	{
+//		perror("Error opening file");
+//		return (1);
+//	}
+//	i = 0;
+//	line = get_map_str(fd, &argv[1]);
+//	if (line == NULL)
+//		return (0);
+//	while (line[i] != NULL)
+//	{
+//		printf("%s", line[i]);
+//		free(line[i]);
+//		i++;
+//	}
+//	close(fd);
+//	return 0;
 //}
 
-//int	load_images(t_game *game)
-//{
-//	load_wall(game); // 1
-//	load_floor(game); // 0
-//	load_exit(game); // E
-//	load_player(game); // P
-//	load_monster(game); // B
-//	load_chest(game); // C
-//}
+	//while ((line = get_next_line(fd)) != NULL)
+	//{
+	//	printf("%s", line);
+	//	free(line);
+	//}
