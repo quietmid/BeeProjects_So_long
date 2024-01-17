@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/16 17:32:43 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/17 18:17:12 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+# define PIXELS 64
+# define EMOVE 30
+
 typedef struct s_coord
 {
 	int	x;
@@ -39,10 +42,11 @@ typedef struct s_img
 	mlx_image_t *chest_open;
 	mlx_image_t *exit_closed;
 	mlx_image_t *exit_open;
-	mlx_image_t *player;
-	mlx_image_t *monster;
-	mlx_image_t *monster;
-};
+	mlx_image_t *player_right;
+	mlx_image_t *player_left;
+	mlx_image_t *monster_right;
+	mlx_image_t *monster_left;
+}		t_img;
 
 
 typedef struct s_game
@@ -50,7 +54,7 @@ typedef struct s_game
 	char	**map; // the map pointer 2D array
 	size_t 	player; // the player	
 	size_t 	exit; // exit pointer
-	size_t	step;
+	size_t	steps;
 	size_t 	chest;	// the chest pointer
 	size_t	collected;
 	size_t	player_x;
@@ -60,15 +64,15 @@ typedef struct s_game
 	size_t	monster; // the pointer for monster 
 	size_t	monster_x;
 	size_t	monster_y;
+	size_t	height;
+	size_t	width;
+	mlx_texture_t player_right;
+	mlx_texture_t player_left;
+	t_img	*img;
 	mlx_t	*mlx_ptr; // MLX pointer
 	
 }		t_game;
 
-typedef struct s_map
-{
-	size_t	height;
-	size_t	width;
-}		t_map;
 
 //utils functions
 void	error_msg_params(char *msg);
@@ -76,8 +80,28 @@ void	error_msg_params(char *msg);
 //map functions
 
 t_game	*check_map(char *mapfile, t_game *game);
+t_game	*initialzing_game_struct(char **map_array, t_game *game);
 char	*get_map_str(char *mapfile);
 void	check_map_content(char *map, t_game *game);
-void	check_map_len(char **map, t_map *dim);
+void	check_map_len(char **map, t_game *game);
+void	check_wall(char **map, t_game *game);
+size_t	get_player_pos(t_game *game, char c);
+size_t	get_exit_pos(t_game *game, char c);
+void	temp_map(t_game *game);
+int		check_path(t_game *temp, size_t y, size_t x);
+void	free_map(char **map, size_t height);
+
+// load images
+t_img	*init_img_struct(mlx_t *mlx_ptr);
+t_img	*load_player_r_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_player_l_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_monster_l_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_monster_r_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_exitopen_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_exitclosed_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_chestop_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_chestcl_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_floor_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_wall_text(mlx_t *mlx_ptr, t_img *img);
 
 #endif
