@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/17 18:17:12 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/19 15:48:28 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,29 +79,31 @@ void	error_msg_params(char *msg);
 
 //map functions
 
-t_game	*check_map(char *mapfile, t_game *game);
-t_game	*initialzing_game_struct(char **map_array, t_game *game);
+t_game	*check_map(char *mapfile);
+t_game	*initialzing_game_struct(char **map_array);
 char	*get_map_str(char *mapfile);
-void	check_map_content(char *map, t_game *game);
-void	check_map_len(char **map, t_game *game);
-void	check_wall(char **map, t_game *game);
+void	check_map_content(char *map);
+void	check_map_len(char **map);
+void	check_wall(t_game *game);
 size_t	get_player_pos(t_game *game, char c);
 size_t	get_exit_pos(t_game *game, char c);
 void	temp_map(t_game *game);
 int		check_path(t_game *temp, size_t y, size_t x);
 void	free_map(char **map, size_t height);
+size_t	map_height(char **map);
 
 // load images
 t_img	*init_img_struct(mlx_t *mlx_ptr);
-t_img	*load_player_r_text(mlx_t *mlx_ptr, t_img *img);
-t_img	*load_player_l_text(mlx_t *mlx_ptr, t_img *img);
-t_img	*load_monster_l_text(mlx_t *mlx_ptr, t_img *img);
-t_img	*load_monster_r_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_monster_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_exitopen_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_exitclosed_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_chestop_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_chestcl_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_floor_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_wall_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img);
+
+//Make Image to Window Map
+void	fill_map(t_game *data);
 
 #endif

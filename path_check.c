@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:04:21 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/17 17:49:36 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/19 14:14:20 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	temp_map(t_game *game)
 	i = 0;
 	while (i < temp.height)
 	{
-		temp.map[i] = ft_stdup(game->map[i]);
+		temp.map[i] = ft_strdup(game->map[i]);
 		i++;
 	}
 	check_path(&temp, temp.player_x, temp.player_y);

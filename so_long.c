@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:44 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/17 17:52:16 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/19 15:38:30 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(void)
 	return (0);
 }
 */
+
 int	is_ber(char *file)
 {
 	int	len;
@@ -52,14 +53,22 @@ int	main(int argc, char **argv)
 	t_game	*game;
 	t_img	*images;
 
-	game->map = NULL;
 	if (argc != 2)
 		error_msg_params("Wrong number of arguments"); // check # of argu
 	if (is_ber(argv[1]) == 0)
 		error_msg_params("Not a valid map file"); // check map file
-	game = check_map(argv[1], &game); // check and create map_str
-	if (!(game->mlx_ptr = mlx_init(game->width * PIXELS, game->height * PIXELS, "so_long", false)))
-		return (EXIT_FAILURE);
-	images = init_img_struct(game->mlx_ptr);
-	game->img = images;
+	game = check_map(argv[1]); // check and create map_str
+	if (!game)
+	{
+		printf("Map failed");
+		return (0);
+	}
+	else 
+		printf("map succeed");
+	//if (!(game->mlx_ptr = mlx_init(game->width * PIXELS, game->height * PIXELS, "so_long", false)))
+	//	return (EXIT_FAILURE);
+	//images = init_img_struct(game->mlx_ptr);
+	//game->img = images;
+	//fill_map(game);
+	return (0);
 }

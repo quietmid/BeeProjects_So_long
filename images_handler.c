@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:59:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/17 18:16:10 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/19 14:17:39 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,10 @@ t_img	*load_exitopen_text(mlx_t *mlx_ptr, t_img *img)
 	return (img);
 }
 
-t_img	*load_monster_r_text(mlx_t *mlx_ptr, t_img *img)
+t_img	*load_monster_text(mlx_t *mlx_ptr, t_img *img)
 {
 	mlx_texture_t	*monster_r;
+	mlx_texture_t	*monster_l;
 
 	monster_r = mlx_load_png("./assets/enemy/goblin_Right.png");
 	if (!monster_r)
@@ -107,13 +108,6 @@ t_img	*load_monster_r_text(mlx_t *mlx_ptr, t_img *img)
 	if (!img->monster_right)
 		error_msg_params("Problem with texture to image");
 	mlx_delete_texture(monster_r);
-	return (img);
-}
-
-t_img	*load_monster_l_text(mlx_t *mlx_ptr, t_img *img)
-{
-	mlx_texture_t	*monster_l;
-
 	monster_l = mlx_load_png("./assets/enemy/goblin_Left.png");
 	if (!monster_l)
 		error_msg_params("Problem with png loading");
@@ -124,30 +118,3 @@ t_img	*load_monster_l_text(mlx_t *mlx_ptr, t_img *img)
 	return (img);
 }
 
-t_img	*load_player_l_text(mlx_t *mlx_ptr, t_img *img)
-{
-	mlx_texture_t	*player_l;
-
-	player_l = mlx_load_png("./assets/hero/knight_LeftLooking.png");
-	if (!player_l)
-		error_msg_params("Problem with png loading");
-	img->player_left = mlx_texture_to_image(mlx_ptr, player_l);
-	if (!img->player_left)
-		error_msg_params("Problem with texture to image");
-	mlx_delete_texture(player_l);
-	return (img);
-}
-
-t_img	*load_player_r_text(mlx_t *mlx_ptr, t_img *img)
-{
-	mlx_texture_t	*player_r;
-
-	player_r = mlx_load_png("./assets/hero/knight_lookingRight.png");
-	if (!player_r)
-		error_msg_params("Problem with png loading");
-	img->player_right = mlx_texture_to_image(mlx_ptr, player_r);
-	if (!img->player_right)
-		error_msg_params("Problem with texture to image");
-	mlx_delete_texture(player_r);
-	return (img);
-}

@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 18:56:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/16 16:27:13 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/19 15:45:51 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,19 @@ char	*ft_strcpy(char *dest, char *src)
 // prints out the error msg and also free the array of map string
 void	error_msg_params(char *msg)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putendl_fd(msg, 2);
+	ft_putstr_fd("Error\n", 1);
+	ft_putendl_fd(msg, 1);
 	exit (1);
+}
+
+size_t	map_height(char **map)
+{
+	size_t y;
+
+	y = 0;
+	while (map[y])
+		y++;
+	return (y);
 }
 
 //int main(void)
