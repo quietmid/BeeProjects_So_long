@@ -1,6 +1,10 @@
-#include "so_long.h"
+// #include "so_long.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 
-void	check_map_content(char *map, t_game *game)
+void	check_map_content(char *map)
 {
 	int	i;
 
@@ -17,20 +21,22 @@ void	check_map_content(char *map, t_game *game)
 		else if (map[i] == 'C')
 			chest++;
 		else if (map[i] != '0' && map[i] != '1' && map[i] != '\n')
+		{
 			printf("Invalid Map, wrong input %i\n", i);
+			break;
+		}
 		i++;
 	}
-	if (exit != 1 || player != 1 || chest < 1)
-		printf("Invalid Map, not enough\n");
-	else
+	if (map[i] == '\0' && (exit != 1 && player != 1 && chest < 1))
+		printf("Invalid Map, it is missing key details\n");
+	else if (map[i] == '\0' && (exit == 1 && player == 1 && chest >= 1))
 		printf("Success map\n");
 }
 
 int	main()
 {
-	char *str = "111111PCE11111\n111111\n111111\n";
-	t_game	*game;
+	char *str = "11111\n10001\n101C1\n10101\n1E1P1\n11111";
 
-	check_map_content(str, game);
+	check_map_content(str);
 	return (0);
 }
