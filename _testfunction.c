@@ -11,8 +11,8 @@ void	check_map_content(char *map)
 	int chest = 0;
 	int exit = 0;
 	int player = 0;
-	i = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
 		if (map[i] == 'P')
 			player++;
@@ -21,21 +21,17 @@ void	check_map_content(char *map)
 		else if (map[i] == 'C')
 			chest++;
 		else if (map[i] != '0' && map[i] != '1' && map[i] != '\n')
-		{
 			printf("Invalid Map, wrong input %i\n", i);
-			break;
-		}
-		i++;
 	}
-	if (map[i] == '\0' && (exit != 1 && player != 1 && chest < 1))
-		printf("Invalid Map, it is missing key details\n");
-	else if (map[i] == '\0' && (exit == 1 && player == 1 && chest >= 1))
+	if (map[i] == '\0' && exit == 1 && player == 1 && chest >= 1)
 		printf("Success map\n");
+	else
+		printf("Invalid Map, it is missing key details\n");
 }
 
 int	main()
 {
-	char *str = "11111\n10001\n101C1\n10101\n1E1P1\n11111";
+	char *str = "11111\n10001\n10101\n101C1\n1E1P1\n11C11";
 
 	check_map_content(str);
 	return (0);
