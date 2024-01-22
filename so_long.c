@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:44 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/19 15:38:30 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/22 17:27:35 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,14 @@ int	main(int argc, char **argv)
 		error_msg_params("Not a valid map file"); // check map file
 	game = check_map(argv[1]); // check and create map_str
 	if (!game)
-	{
 		printf("Map failed");
-		return (0);
-	}
-	else 
-		printf("map succeed");
-	//if (!(game->mlx_ptr = mlx_init(game->width * PIXELS, game->height * PIXELS, "so_long", false)))
-	//	return (EXIT_FAILURE);
-	//images = init_img_struct(game->mlx_ptr);
-	//game->img = images;
-	//fill_map(game);
+	if (!(game->mlx_ptr = mlx_init(game->width * PIXELS, game->height * PIXELS, "so_long", true)))
+		return (EXIT_FAILURE);
+	images = init_img_struct(game->mlx_ptr);
+	game->img = images;
+	fill_map(game);
+	render_map(game);
+	mlx_loop(game->mlx_ptr);
+	mlx_terminate(game->mlx_ptr);
 	return (0);
 }

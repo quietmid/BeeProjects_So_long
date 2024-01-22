@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 18:56:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/19 15:45:51 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/22 16:46:45 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,28 @@ size_t	map_height(char **map)
 	while (map[y])
 		y++;
 	return (y);
+}
+
+size_t	count_chests(t_game *game)
+{
+	size_t	y;
+	size_t	x;
+	size_t	i;
+
+	y = 0;
+	i = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			if (game->map[y][x] == 'C')
+				i++;
+			x++;
+		}
+		y++;
+	}
+	return (i);
 }
 
 //int main(void)

@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:33:31 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/19 16:00:17 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/22 13:57:50 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	check_wall(t_game *game)
 	size_t	x;
 	size_t	y;
 	
-	x = 0;
 	y = 0;
 	while (y < game->height)
 	{
@@ -34,9 +33,10 @@ void	check_wall(t_game *game)
 			error_msg_params("It needs the best wall");
 		y++;
 	}
+	x = 0;
 	while (x < game->width)
 	{
-		if (game->map[0][x] != '1' || game->map[game->height][x] != '1')
+		if (game->map[0][x] != '1' || game->map[game->height - 1][x] != '1')
 			error_msg_params("It needs the best wall");
 		x++;
 	}
@@ -78,8 +78,9 @@ void	check_map_content(char *map)
 			exit++;
 		else if (map[i] == 'C')
 			chest++;
-		else if (map[i] != '0' && map[i] != '1' && map[i] != '\n')
-			error_msg_params("Invalid Map, Invalid char");
+		else if (map[i] != '0' && map[i] != '1' && map[i] != '\n' && map[i] != '\0')
+			printf("Invald map, invalid char %i\n", i);
+			//error_msg_params("Invalid Map, Invalid char");
 	}
 	if (exit != 1 || player != 1 || chest < 1)
 		error_msg_params("Invalid Map, # of Player, chest, or exit is wrong");
@@ -148,7 +149,8 @@ size_t	get_player_pos(t_game *game, char c)
 			{
 				if (c == 'x')
 					return (x);
-				return (y);
+				else
+					return (y);
 			}
 			x++;
 		}

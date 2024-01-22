@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/19 15:48:28 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/22 17:29:40 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	temp_map(t_game *game);
 int		check_path(t_game *temp, size_t y, size_t x);
 void	free_map(char **map, size_t height);
 size_t	map_height(char **map);
+size_t	count_chests(t_game *game);
 
 // load images
 t_img	*init_img_struct(mlx_t *mlx_ptr);
@@ -105,5 +106,7 @@ t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img);
 
 //Make Image to Window Map
 void	fill_map(t_game *data);
+void	select_image(t_game *game , size_t y, size_t x);
+void	render_map(t_game *game);
 
 #endif
