@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:59:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/19 14:17:39 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/23 14:57:48 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_img	*load_wall_text(mlx_t *mlx_ptr, t_img *img)
 {
 	mlx_texture_t	*wall;
 
-	wall = mlx_load_png("./assets/walls/wall_2.png");
+	wall = mlx_load_png("./assets/walls/boarder.png");
 	if (!wall)
 		error_msg_params("Problem with png loading");
 	img->wall = mlx_texture_to_image(mlx_ptr, wall);
@@ -30,7 +30,7 @@ t_img	*load_floor_text(mlx_t *mlx_ptr, t_img *img)
 {
 	mlx_texture_t	*floor;
 
-	floor = mlx_load_png("./assets/floor/floor_6.png");
+	floor = mlx_load_png("./assets/floor/floor.png");
 	if (!floor)
 		error_msg_params("Problem with png loading");
 	img->floor = mlx_texture_to_image(mlx_ptr, floor);
@@ -115,6 +115,20 @@ t_img	*load_monster_text(mlx_t *mlx_ptr, t_img *img)
 	if (!img->monster_left)
 		error_msg_params("Problem with texture to image");
 	mlx_delete_texture(monster_l);
+	return (img);
+}
+
+t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img)
+{
+	mlx_texture_t	*player;
+
+	player = mlx_load_png("./assets/hero/Hero.png");
+	if (!player)
+		error_msg_params("Problem with png loading");
+	img->player = mlx_texture_to_image(mlx_ptr, player);
+	if (!img->player)
+		error_msg_params("Problem with texture to image");
+	mlx_delete_texture(player);
 	return (img);
 }
 
