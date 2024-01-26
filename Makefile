@@ -70,12 +70,12 @@ clean:
 		@$(MAKE) clean -C ./libft
 		@$(MAKE) clean -C ./MLX42
 		@echo "Removing $(OBJECTS_DIR)"
-		@rm -f $(OBJECTS) 
+		@rm -f $(OBJECTS_DIR) 
 
 fclean: clean
 		@$(MAKE) fclean -C ./libft
 		@$(MAKE) fclean -C ./MLX42
-		@rm -f $(NAME)
+		@rm -f $(NAME) $(PROJECT) $(OBJECTS_DIR)
 		@echo "$(GREEN) $(PROJECT) $(RESET) SO CLEANED"
 
 re: fclean all
