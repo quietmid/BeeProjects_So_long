@@ -6,7 +6,7 @@
 #    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/25 16:05:56 by jlu               #+#    #+#              #
-#    Updated: 2024/01/25 19:23:27 by jlu              ###   ########.fr        #
+#    Updated: 2024/01/26 15:43:21 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,15 +68,16 @@ $(OBJECTS_DIR)/%.o: ./functions/%.c
 
 clean:
 		@$(MAKE) clean -C ./libft
-		@$(MAKE) clean -C ./MLX42
-		@echo "Removing $(OBJECTS_DIR)"
-		@rm -f $(OBJECTS_DIR) 
+		@$(MAKE) clean -C ./MLX42/build
+		@rm -rf $(OBJECTS_DIR)/*.o
+		@if [ -f "$(OBJECTS_DIR)" ]; then rmdir -p $(OBJECTS_DIR); fi
+		@echo "$(WHITE) $(OBJECTS_DIR) $(GREEN) REMOVED"
 
 fclean: clean
 		@$(MAKE) fclean -C ./libft
-		@$(MAKE) fclean -C ./MLX42
-		@rm -f $(NAME) $(PROJECT) $(OBJECTS_DIR)
-		@echo "$(GREEN) $(PROJECT) $(RESET) SO CLEANED"
+		@$(MAKE) clean -C ./MLX42/build
+		@rm -rf $(NAME)
+		@echo "$(WHITE) $(PROJECT) $(RESET) $(GREEN) SO CLEANED"
 
 re: fclean all
 
