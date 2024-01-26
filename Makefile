@@ -14,7 +14,7 @@ PROJECT = so long
 NAME = so_long
 
 LIBFT = ./libft/libft.a
-MLX42 = ./MLX42/libmlx42.a
+MLX42 = ./MLX42/build/libmlx42.a
 
 SRC = ./functions/so_long.c \
 	  ./functions/path_check.c \
@@ -29,7 +29,7 @@ SRC = ./functions/so_long.c \
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MLX42FLAGS = -Iinclude -lglfw -L"/Users/jlu/.brew/opt/glfw/lib/"
+MLX42FLAGS = -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/josephlu/.brew/opt/glfw/lib/"
 
 #Color ANSI Code 
 BOLD   := \033[1m./SRC/

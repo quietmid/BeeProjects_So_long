@@ -14,9 +14,9 @@
 
 void	select_image(t_game *game , size_t y, size_t x)
 {
-	size_t	img_size;
+	// size_t	img_size;
 
-	img_size = 32;
+	// img_size = 32;
 	if (game->map[y][x] == '1')
 		if (mlx_image_to_window(game->mlx_ptr, game->img->wall, x * PIXELS, y * PIXELS) < 0)
 			error_msg_params("Failed to put image to Wall");

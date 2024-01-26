@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:00:45 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/23 17:46:07 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/26 18:50:23 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 //	}
 //}
 
+
+// draw the new image here
+	//mlx_image_to_window(game->mlx_ptr, game->img->player_right, 1, 2);
+	//only puts the new char at the top left corner
+	// might have to delete player image every time before and replace it
+
 t_game	*player_right(t_game *game)
 {
 	if (game->map[game->player_y][game->player_x + 1] != '1' && game->map[game->player_y][game->player_x + 1] != 'E')
@@ -32,6 +38,7 @@ t_game	*player_right(t_game *game)
 
 		//}
 		game->player_x += 1;
+		game->img->player = mlx_image_to_window(game->mlx_ptr, game->img->player_right, 1, 2);
 		game->img->player->instances[0].x += 1 * PIXELS;
 		game->steps += 1;
 	}

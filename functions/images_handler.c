@@ -121,6 +121,7 @@ t_img	*load_monster_text(mlx_t *mlx_ptr, t_img *img)
 t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img)
 {
 	mlx_texture_t	*player;
+	mlx_texture_t	*player_right;
 
 	player = mlx_load_png("./assets/hero/Hero.png");
 	if (!player)
@@ -129,6 +130,13 @@ t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img)
 	if (!img->player)
 		error_msg_params("Problem with texture to image");
 	mlx_delete_texture(player);
+	player_right = mlx_load_png("./assets/hero/Walk_Right.png");
+	if (!player_right)
+		error_msg_params("Problem with png loading");
+	img->player = mlx_texture_to_image(mlx_ptr, player_right);
+	if (!img->player_right)
+		error_msg_params("Problem with texture to image");
+	mlx_delete_texture(player_right);
 	return (img);
 }
 

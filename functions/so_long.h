@@ -41,6 +41,7 @@ typedef struct s_img
 	mlx_image_t *exit_closed;
 	mlx_image_t *exit_open;
 	mlx_image_t *player;
+	mlx_image_t *player_right;
 	mlx_image_t *monster_right;
 	mlx_image_t *monster_left;
 }		t_img;
