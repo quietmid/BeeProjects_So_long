@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/25 18:52:08 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/30 17:16:19 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ typedef struct s_img
 	mlx_image_t *exit_closed;
 	mlx_image_t *exit_open;
 	mlx_image_t *player;
+	mlx_image_t *player_die;
 	mlx_image_t *player_right;
+	mlx_image_t	*player_left;
+	mlx_image_t	*player_down;
+	mlx_image_t	*player_up;
 	mlx_image_t *monster_right;
 	mlx_image_t *monster_left;
 }		t_img;
@@ -53,7 +57,7 @@ typedef struct s_game
 	size_t 	player;
 	size_t 	exit; 
 	size_t	steps;
-	size_t 	chest;	// the chest
+	size_t 	chest;	// the # of chest
 	size_t	collected;
 	size_t	player_x; // player location
 	size_t	player_y; // player location
@@ -103,11 +107,15 @@ t_img	*load_chestcl_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_floor_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_wall_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_playerrnl_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_playerund_text(mlx_t *mlx_ptr, t_img *img);
 
 //Make Image to Window Map
 void	fill_map(t_game *data);
 void	select_image(t_game *game , size_t y, size_t x);
 void	render_map(t_game *game);
+void	clear_player(t_game *game);
+void load_player_window(t_game *game, size_t y, size_t x);
 
 //Input
 void	move_hook(mlx_key_data_t keydata, void *data);
@@ -116,7 +124,7 @@ t_game	*player_right(t_game *game);
 t_game	*player_left(t_game *game);
 t_game	*player_down(t_game *game);
 t_game	*player_up(t_game *game);
+void	remove_chest(t_game *game, int y, int x);
 
-//void	remove_chest(t_game *game, int y, int x);
 
 #endif

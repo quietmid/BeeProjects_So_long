@@ -6,17 +6,34 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:01:43 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/23 14:59:58 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/30 18:09:28 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	select_image(t_game *game , size_t y, size_t x)
+void	load_player_window(t_game *game, size_t y, size_t x)
 {
-	// size_t	img_size;
+	size_t img_size;
 
-	// img_size = 32;
+	img_size = 32;
+	if (mlx_image_to_window(game->mlx_ptr, game->img->player_right, x * PIXELS, y * PIXELS) < 0)
+		error_msg_params("Failed to put image to Player");
+	if (mlx_image_to_window(game->mlx_ptr, game->img->player_up, x * PIXELS, y * PIXELS) < 0)
+		error_msg_params("Failed to put image to Player");
+	if (mlx_image_to_window(game->mlx_ptr, game->img->player_left, x * PIXELS, y * PIXELS) < 0)
+		error_msg_params("Failed to put image to Player");
+	if (mlx_image_to_window(game->mlx_ptr, game->img->player_down, x * PIXELS, y * PIXELS) < 0)
+		error_msg_params("Failed to put image to Player");
+	clear_player(game);
+	game->img->player->enabled = true;
+}
+
+void	select_image(t_game *game, size_t y, size_t x)
+{
+	size_t	img_size;
+
+	img_size = 32;
 	if (game->map[y][x] == '1')
 		if (mlx_image_to_window(game->mlx_ptr, game->img->wall, x * PIXELS, y * PIXELS) < 0)
 			error_msg_params("Failed to put image to Wall");
@@ -69,4 +86,5 @@ void	render_map(t_game *game)
 		}
 		y++;
 	}
+	load_player_window(game, game->player_y, game->player_x);
 }
