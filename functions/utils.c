@@ -6,24 +6,11 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 18:56:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/25 19:00:52 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/31 17:05:25 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	return (dest);
-}
 
 // prints out the error msg and also free the array of map string
 void	error_msg_params(char *msg)
@@ -32,28 +19,36 @@ void	error_msg_params(char *msg)
 	ft_putendl_fd(msg, 1);
 	exit (1);
 }
+void	count_moves(t_game *game)
+{
+	char	*str;
 
+	str = ft_itoa(game->steps);
+	ft_putstr_fd("Moves:", 1);
+	ft_putendl_fd(str, 1);
+}
 
+void	check_game(t_game *game)
+{
+	count_moves(game);
+	if (game->collected == game->chest)
+	{
+		if (mlx_image_to_window(game->mlx_ptr, game->img->exit_open, game->exit_x * PIXELS, game->exit_y * PIXELS) < 0)
+			error_msg_params("Failed to put exit_open image to window!");
+		game->map[game->exit_y][game->exit_x] = '0';
+		if (game->player_y == game->exit_y && game->player_x == game->exit_x)
+		{
+			game->img->you_win = mlx_put_string(game->mlx_ptr, "You WIN!", ((game->width - 2) * PIXELS) / 2, ((game->height - 1) * PIXELS) / 2);
+		}
+	}
+}
 
-//int main(void)
-//{
-//	char	*map[5];
-
-//	for (int i = 0; i < 5; i++) 
-//	{
-//  		map[i] = malloc(sizeof(char) * 100);
-//  		if (!map[i]) 
-//  		{
-//    		return (0);
-//  		}
-//	}	
-
-//// Assign string values to each element
-//	for (int i = 0; i < 5; i++) 
-//	{
-//  		ft_strcpy(map[i], "aksjdflajfdlkj");
-//	}
-//	printf("%s\n", map[4]);
-//	error_msg_params("Too many arg", map);
-//	return (0);
-//}
+void	clear_player(t_game *game)
+{
+	game->img->player_down->enabled = false;
+	game->img->player_left->enabled = false;
+	game->img->player_up->enabled = false;
+	game->img->player_right->enabled = false;
+	game->img->player->enabled = false;
+	game->img->player_die->enabled = false;
+}

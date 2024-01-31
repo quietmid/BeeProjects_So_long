@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/30 17:16:19 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/31 17:58:28 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 
 # define PIXELS 32
 # define EMOVE 30
+
+typedef struct s_var
+{
+	int	ran_x;
+	int	ran_y;
+	int	*x;
+	int	*y;
+	int	idx_x;
+	int	idx_y;
+}		t_var;
 
 typedef struct s_coord
 {
@@ -48,6 +58,8 @@ typedef struct s_img
 	mlx_image_t	*player_up;
 	mlx_image_t *monster_right;
 	mlx_image_t *monster_left;
+	mlx_image_t *you_win;
+	mlx_image_t *you_lose;
 }		t_img;
 
 
@@ -68,10 +80,6 @@ typedef struct s_game
 	size_t	monster_y;
 	size_t	height;
 	size_t	width;
-	mlx_texture_t *player_Right;
-	mlx_texture_t *player_Left;
-	mlx_texture_t *player_Up;
-	mlx_texture_t *player_Down;
 	t_img	*img;
 	mlx_t	*mlx_ptr; // MLX pointer
 	
@@ -115,7 +123,8 @@ void	fill_map(t_game *data);
 void	select_image(t_game *game , size_t y, size_t x);
 void	render_map(t_game *game);
 void	clear_player(t_game *game);
-void load_player_window(t_game *game, size_t y, size_t x);
+void	load_player_window(t_game *game, size_t y, size_t x);
+void	load_monster_window(t_game *game, size_t y, size_t x);
 
 //Input
 void	move_hook(mlx_key_data_t keydata, void *data);
@@ -125,6 +134,14 @@ t_game	*player_left(t_game *game);
 t_game	*player_down(t_game *game);
 t_game	*player_up(t_game *game);
 void	remove_chest(t_game *game, int y, int x);
+void	check_game(t_game *game);
+void	count_moves(t_game *game);
+
+//bonus
+void	monster_move(t_game *game, int count);
+void	check_touched(t_game *game);
+void	monster_patrol(void *temp);
+size_t	count_monster(t_game *game);
 
 
 #endif

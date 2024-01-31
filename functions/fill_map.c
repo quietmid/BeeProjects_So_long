@@ -6,17 +6,22 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:01:43 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/30 18:09:28 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/31 17:00:08 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	load_monster_window(t_game *game, size_t y, size_t x)
+{
+	if (mlx_image_to_window(game->mlx_ptr, game->img->monster_left, x * PIXELS, y * PIXELS) < 0)
+		error_msg_params("Failed to put image to Monster");
+	if (mlx_image_to_window(game->mlx_ptr, game->img->monster_right, x * PIXELS, y * PIXELS) < 0)
+		error_msg_params("Failed to put image to Monster");
+}
+
 void	load_player_window(t_game *game, size_t y, size_t x)
 {
-	size_t img_size;
-
-	img_size = 32;
 	if (mlx_image_to_window(game->mlx_ptr, game->img->player_right, x * PIXELS, y * PIXELS) < 0)
 		error_msg_params("Failed to put image to Player");
 	if (mlx_image_to_window(game->mlx_ptr, game->img->player_up, x * PIXELS, y * PIXELS) < 0)
@@ -24,6 +29,8 @@ void	load_player_window(t_game *game, size_t y, size_t x)
 	if (mlx_image_to_window(game->mlx_ptr, game->img->player_left, x * PIXELS, y * PIXELS) < 0)
 		error_msg_params("Failed to put image to Player");
 	if (mlx_image_to_window(game->mlx_ptr, game->img->player_down, x * PIXELS, y * PIXELS) < 0)
+		error_msg_params("Failed to put image to Player");
+	if (mlx_image_to_window(game->mlx_ptr, game->img->player_die, x * PIXELS, y * PIXELS) < 0)
 		error_msg_params("Failed to put image to Player");
 	clear_player(game);
 	game->img->player->enabled = true;
@@ -46,6 +53,9 @@ void	select_image(t_game *game, size_t y, size_t x)
 	if (game->map[y][x] == 'E')
 		if (mlx_image_to_window(game->mlx_ptr, game->img->exit_closed, x * PIXELS, y * PIXELS) < 0)
 			error_msg_params("Failed to put image to Exit");
+	if (game->map[y][x] == 'X')
+		if (mlx_image_to_window(game->mlx_ptr, game->img->monster_left, x * PIXELS, y * PIXELS) < 0)
+			error_msg_params("Failed to put image to Monster");
 
 }
 

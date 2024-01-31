@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:42:08 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/30 16:29:37 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/31 17:06:24 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_game	*initialzing_game_struct(char **map_array)
 	game->map = map_array;
 	game->steps = 0;
 	game->collected = 0;
+	game->monster = count_monster(game);
 	game->chest = count_chests(game);
 	game->player_x = get_player_pos(game, 'x');
 	game->player_y = get_player_pos(game, 'y');
