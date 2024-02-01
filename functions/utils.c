@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 18:56:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/31 17:05:25 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/01 18:32:44 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	check_game(t_game *game)
 		if (game->player_y == game->exit_y && game->player_x == game->exit_x)
 		{
 			game->img->you_win = mlx_put_string(game->mlx_ptr, "You WIN!", ((game->width - 2) * PIXELS) / 2, ((game->height - 1) * PIXELS) / 2);
+			game->condition = 1;
+			mlx_key_hook(game->mlx_ptr, end_game, game);
 		}
 	}
 }

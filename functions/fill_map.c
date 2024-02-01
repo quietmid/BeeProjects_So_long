@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:01:43 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/31 17:00:08 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/01 16:24:01 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ void	load_player_window(t_game *game, size_t y, size_t x)
 
 void	select_image(t_game *game, size_t y, size_t x)
 {
-	size_t	img_size;
-
-	img_size = 32;
 	if (game->map[y][x] == '1')
 		if (mlx_image_to_window(game->mlx_ptr, game->img->wall, x * PIXELS, y * PIXELS) < 0)
 			error_msg_params("Failed to put image to Wall");

@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:38:37 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/31 17:57:44 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/01 18:33:26 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	check_touched(t_game *game)
 			clear_player(game);
 			game->img->player_die->enabled = true;
 			game->img->you_lose = mlx_put_string(game->mlx_ptr, "You Lose :(", ((game->width - 2) * PIXELS) / 2, ((game->height - 1) * PIXELS) / 2);
+			game->condition = 2;
+			mlx_key_hook(game->mlx_ptr, end_game, game);
 		}
 		i++;
 	}
@@ -85,10 +87,34 @@ void	monster_patrol(void *temp)
 	{
 		return ;
 	}
-	while (count < game->monster)
+	while (count < game->monster && game->condition == 0)
 	{
 		monster_move(game, count);
 		count++;
 	}
 	i = 0;
 }
+
+void	end_game(mlx_key_data_t key, void *data)
+{
+	t_game *game;
+
+	game = (t_game *) data;
+	if (game->condition == 2)
+	{
+		if (mlx_is_key_down(game->mlx_ptr, key.key))
+		{
+			mlx_close_window(game->mlx_ptr);
+			ft_putstr_fd("The Goblin got you! Let's try again\n", 1);
+		}
+	}
+	else
+	{
+		if (mlx_is_key_down(game->mlx_ptr, key.key))
+		{
+			mlx_close_window(game->mlx_ptr);
+			ft_putstr_fd("You found all the chest and avoided all the goblins!\n", 1);
+		}
+	}
+}
+

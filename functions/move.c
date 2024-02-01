@@ -6,24 +6,11 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:29:22 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/30 16:18:32 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/01 16:57:58 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//void	load_player(t_game *game, char dir)
-//{
-//	if (dir == 'u')
-//		mlx_set_instance_depth(&game->img->player_up->instances[0], 5);
-//	if (dir == 'd')
-//		mlx_set_instance_depth(&game->img->player_down->instances[0], 5);
-//	if (dir == 'r')
-//		mlx_set_instance_depth(&game->img->player_right->instances[0], 5);
-//	if (dir == 'l')
-//		mlx_set_instance_depth(&game->img->player_left->instances[0], 5);
-//}
-
 
 void	move_player(t_game *game, char line, char dir)
 {

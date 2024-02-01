@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/31 17:58:28 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/01 18:32:04 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <fcntl.h>
 
 # define PIXELS 32
-# define EMOVE 30
+# define EMOVE 45
 
 typedef struct s_var
 {
@@ -80,6 +80,7 @@ typedef struct s_game
 	size_t	monster_y;
 	size_t	height;
 	size_t	width;
+	int		condition; // 0 = start of the game 1 = reached the exit 2 = monster wins
 	t_img	*img;
 	mlx_t	*mlx_ptr; // MLX pointer
 	
@@ -142,6 +143,7 @@ void	monster_move(t_game *game, int count);
 void	check_touched(t_game *game);
 void	monster_patrol(void *temp);
 size_t	count_monster(t_game *game);
+void	end_game(mlx_key_data_t key, void *data);
 
 
 #endif
