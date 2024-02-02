@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:44 by jlu               #+#    #+#             */
-/*   Updated: 2024/02/01 17:16:30 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/02 14:19:34 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ int	main(int argc, char **argv)
 	game->img = images;
 	fill_map(game);
 	render_map(game);
+	bonus_to_window(game);
 	mlx_key_hook(game->mlx_ptr, move_hook, game);
 	mlx_loop_hook(game->mlx_ptr, monster_patrol, game);
 	mlx_loop(game->mlx_ptr);
 	mlx_terminate(game->mlx_ptr);
-	return (0);
+	return (EXIT_SUCCESS);
 }

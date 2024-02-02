@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:33:31 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/31 16:50:35 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/02 16:14:36 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ t_game	*check_map(char *mapfile)
 	check_wall(data);
 	temp_map(data);
 	free(map_str);
+	//free_2d(map_array);
 	return (data);
 }

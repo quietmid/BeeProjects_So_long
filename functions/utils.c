@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 18:56:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/02/01 18:32:44 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/02 16:14:39 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ void	count_moves(t_game *game)
 	str = ft_itoa(game->steps);
 	ft_putstr_fd("Moves:", 1);
 	ft_putendl_fd(str, 1);
+	free(str);
 }
 
 void	check_game(t_game *game)
 {
 	count_moves(game);
+	count_moves_bonus(game);
+	count_collected_bonus(game);
+	printf("collected: %zu\n", game->collected);
+	printf("chest: %zu\n", game->chest);
 	if (game->collected == game->chest)
 	{
 		if (mlx_image_to_window(game->mlx_ptr, game->img->exit_open, game->exit_x * PIXELS, game->exit_y * PIXELS) < 0)
@@ -54,3 +59,18 @@ void	clear_player(t_game *game)
 	game->img->player->enabled = false;
 	game->img->player_die->enabled = false;
 }
+
+//void	free_2d(char **str)
+//{
+//	int	i;
+
+//	i = 0;
+//	while (str[i])
+//	{
+//		if (str[i])
+//		{
+//			free(str[i]);
+//		}
+//		i++;
+//	}
+//}

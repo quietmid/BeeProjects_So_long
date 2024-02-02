@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:24:39 by jlu               #+#    #+#             */
-/*   Updated: 2024/02/01 18:32:04 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/02 14:59:02 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ typedef struct s_img
 	mlx_image_t *monster_left;
 	mlx_image_t *you_win;
 	mlx_image_t *you_lose;
+	mlx_image_t *moves_print;
+	mlx_image_t *moves_nbr;
+	mlx_image_t *count;
 }		t_img;
 
 
@@ -105,6 +108,7 @@ int		check_path(t_game *temp, size_t y, size_t x);
 void	free_map(char **map, size_t height);
 size_t	map_height(char **map);
 size_t	count_chests(t_game *game);
+void	free_2d(char **str);
 
 // load images
 t_img	*init_img_struct(mlx_t *mlx_ptr);
@@ -138,12 +142,18 @@ void	remove_chest(t_game *game, int y, int x);
 void	check_game(t_game *game);
 void	count_moves(t_game *game);
 
-//bonus
+//bonus monster
 void	monster_move(t_game *game, int count);
 void	check_touched(t_game *game);
 void	monster_patrol(void *temp);
 size_t	count_monster(t_game *game);
 void	end_game(mlx_key_data_t key, void *data);
+
+// bonus screen counts
+void	bonus_to_window(t_game *game);
+void	count_moves_bonus(t_game *game);
+void	count_collected_bonus(t_game *game);
+
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:00:45 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/31 17:20:33 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/02 15:46:20 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	remove_chest(t_game *game, int y, int x)
 	while (i < game->chest)
 	{	
 		if (game->img->chest_closed->instances[i].x == x && game->img->chest_closed->instances[i].y == y)
+		{
 			game->img->chest_closed->instances[i].enabled = false;
+
+			printf("chest num: %zu\n", i);
+		}
 		i++;
 	}
 }
@@ -36,7 +40,7 @@ t_game	*player_right(t_game *game)
 		if (game->map[game->player_y][game->player_x + 1] == 'C')
 		{
 			remove_chest(game, game->player_y, game->player_x + 1);
-			game->map[game->player_y][game->player_x] = '0';
+			game->map[game->player_y][game->player_x + 1] = '0';
 			game->collected += 1;
 		}
 		game->player_x += 1;
@@ -61,7 +65,7 @@ t_game	*player_left(t_game *game)
 		if (game->map[game->player_y][game->player_x - 1] == 'C')
 		{
 			remove_chest(game, game->player_y, game->player_x - 1);
-			game->map[game->player_y][game->player_x] = '0';
+			game->map[game->player_y][game->player_x - 1] = '0';
 			game->collected += 1;
 		}
 		game->player_x -= 1;
@@ -77,7 +81,6 @@ t_game	*player_left(t_game *game)
 	check_game(game);
 	return (game);
 }
-
 t_game	*player_down(t_game *game)
 {
 	clear_player(game);
@@ -87,7 +90,7 @@ t_game	*player_down(t_game *game)
 		if (game->map[game->player_y + 1][game->player_x] == 'C')
 		{
 			remove_chest(game, game->player_y + 1, game->player_x);
-			game->map[game->player_y][game->player_x] = '0';
+			game->map[game->player_y + 1][game->player_x] = '0';
 			game->collected += 1;
 		}
 		game->player_y += 1;
@@ -109,7 +112,7 @@ t_game	*player_up(t_game *game)
 	game->img->player_up->enabled = true;
 	if (game->map[game->player_y - 1][game->player_x] != '1' && game->map[game->player_y - 1][game->player_x] != 'E')
 	{
-		if (game->map[game->player_y][game->player_x - 1] == 'C')
+		if (game->map[game->player_y - 1][game->player_x] == 'C')
 		{
 			remove_chest(game, game->player_y - 1, game->player_x);
 			game->map[game->player_y - 1][game->player_x] = '0';
