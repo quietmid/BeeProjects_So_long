@@ -35,6 +35,17 @@ typedef struct s_var
 	int	idx_x;
 	int	idx_y;
 }		t_var;
+# define EMOVE 45
+
+typedef struct s_var
+{
+	int	ran_x;
+	int	ran_y;
+	int	*x;
+	int	*y;
+	int	idx_x;
+	int	idx_y;
+}		t_var;
 
 typedef struct s_coord
 {
@@ -103,6 +114,7 @@ void	free_map(char **map, size_t height);
 size_t	map_height(char **map);
 size_t	count_chests(t_game *game);
 void	free_2d(char **str);
+void	free_2d(char **str);
 
 // load images
 t_img	*init_img_struct(mlx_t *mlx_ptr);
@@ -116,11 +128,16 @@ t_img	*load_wall_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_playerrnl_text(mlx_t *mlx_ptr, t_img *img);
 t_img	*load_playerund_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_playerrnl_text(mlx_t *mlx_ptr, t_img *img);
+t_img	*load_playerund_text(mlx_t *mlx_ptr, t_img *img);
 
 //Make Image to Window Map
 void	fill_map(t_game *data);
 void	select_image(t_game *game, size_t y, size_t x);
 void	render_map(t_game *game);
+void	clear_player(t_game *game);
+void	load_player_window(t_game *game, size_t y, size_t x);
+void	load_monster_window(t_game *game, size_t y, size_t x);
 void	clear_player(t_game *game);
 void	load_player_window(t_game *game, size_t y, size_t x);
 void	load_monster_window(t_game *game, size_t y, size_t x);

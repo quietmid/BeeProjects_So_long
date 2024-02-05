@@ -102,4 +102,5 @@ void	render_map(t_game *game)
 		y++;
 	}
 	load_player_window(game, game->player_y, game->player_x);
+	load_player_window(game, game->player_y, game->player_x);
 }

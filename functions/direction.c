@@ -41,7 +41,18 @@ t_game	*player_right(t_game *game)
 			game->map[game->player_y][game->player_x + 1] = '0';
 			game->collected += 1;
 		}
+		if (game->map[game->player_y][game->player_x + 1] == 'C')
+		{
+			remove_chest(game, game->player_y, game->player_x + 1);
+			game->map[game->player_y][game->player_x + 1] = '0';
+			game->collected += 1;
+		}
 		game->player_x += 1;
+		game->img->player_right->instances[0].x += 1 * PIXELS;
+		game->img->player_up->instances[0].x += 1 * PIXELS;
+		game->img->player_left->instances[0].x += 1 * PIXELS;
+		game->img->player_down->instances[0].x += 1 * PIXELS;
+		game->img->player_die->instances[0].x += 1 * PIXELS;
 		game->img->player_right->instances[0].x += 1 * PIXELS;
 		game->img->player_up->instances[0].x += 1 * PIXELS;
 		game->img->player_left->instances[0].x += 1 * PIXELS;
@@ -49,6 +60,9 @@ t_game	*player_right(t_game *game)
 		game->img->player_die->instances[0].x += 1 * PIXELS;
 		game->steps += 1;
 	}
+	if (game->map[game->player_y][game->player_x + 1] == 'X')
+		check_touched(game);
+	check_game(game);
 	if (game->map[game->player_y][game->player_x + 1] == 'X')
 		check_touched(game);
 	check_game(game);
@@ -68,7 +82,18 @@ t_game	*player_left(t_game *game)
 			game->map[game->player_y][game->player_x - 1] = '0';
 			game->collected += 1;
 		}
+		if (game->map[game->player_y][game->player_x - 1] == 'C')
+		{
+			remove_chest(game, game->player_y, game->player_x - 1);
+			game->map[game->player_y][game->player_x - 1] = '0';
+			game->collected += 1;
+		}
 		game->player_x -= 1;
+		game->img->player_left->instances[0].x -= 1 * PIXELS;
+		game->img->player_down->instances[0].x -= 1 * PIXELS;
+		game->img->player_up->instances[0].x -= 1 * PIXELS;
+		game->img->player_right->instances[0].x -= 1 * PIXELS;
+		game->img->player_die->instances[0].x -= 1 * PIXELS;
 		game->img->player_left->instances[0].x -= 1 * PIXELS;
 		game->img->player_down->instances[0].x -= 1 * PIXELS;
 		game->img->player_up->instances[0].x -= 1 * PIXELS;
@@ -95,7 +120,18 @@ t_game	*player_down(t_game *game)
 			game->map[game->player_y + 1][game->player_x] = '0';
 			game->collected += 1;
 		}
+		if (game->map[game->player_y + 1][game->player_x] == 'C')
+		{
+			remove_chest(game, game->player_y + 1, game->player_x);
+			game->map[game->player_y + 1][game->player_x] = '0';
+			game->collected += 1;
+		}
 		game->player_y += 1;
+		game->img->player_down->instances[0].y += 1 * PIXELS;
+		game->img->player_up->instances[0].y += 1 * PIXELS;
+		game->img->player_right->instances[0].y += 1 * PIXELS;
+		game->img->player_left->instances[0].y += 1 * PIXELS;
+		game->img->player_die->instances[0].y += 1 * PIXELS;
 		game->img->player_down->instances[0].y += 1 * PIXELS;
 		game->img->player_up->instances[0].y += 1 * PIXELS;
 		game->img->player_right->instances[0].y += 1 * PIXELS;
@@ -103,6 +139,9 @@ t_game	*player_down(t_game *game)
 		game->img->player_die->instances[0].y += 1 * PIXELS;
 		game->steps += 1;
 	}
+	if (game->map[game->player_y + 1][game->player_x])
+		check_touched(game);
+	check_game(game);
 	if (game->map[game->player_y + 1][game->player_x])
 		check_touched(game);
 	check_game(game);
@@ -122,7 +161,18 @@ t_game	*player_up(t_game *game)
 			game->map[game->player_y - 1][game->player_x] = '0';
 			game->collected += 1;
 		}
+		if (game->map[game->player_y - 1][game->player_x] == 'C')
+		{
+			remove_chest(game, game->player_y - 1, game->player_x);
+			game->map[game->player_y - 1][game->player_x] = '0';
+			game->collected += 1;
+		}
 		game->player_y -= 1;
+		game->img->player_up->instances[0].y -= 1 * PIXELS;
+		game->img->player_down->instances[0].y -= 1 * PIXELS;
+		game->img->player_right->instances[0].y -= 1 * PIXELS;
+		game->img->player_left->instances[0].y -= 1 * PIXELS;
+		game->img->player_die->instances[0].y -= 1 * PIXELS;
 		game->img->player_up->instances[0].y -= 1 * PIXELS;
 		game->img->player_down->instances[0].y -= 1 * PIXELS;
 		game->img->player_right->instances[0].y -= 1 * PIXELS;
@@ -131,5 +181,7 @@ t_game	*player_up(t_game *game)
 		game->steps += 1;
 	}
 	check_game(game);
+	check_game(game);
 	return (game);
 }
+
