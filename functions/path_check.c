@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:04:21 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/22 16:57:23 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/04 17:37:12 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_map(char **map, size_t height)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < height)
@@ -27,7 +27,6 @@ void	free_map(char **map, size_t height)
 
 int	check_path(t_game *temp, size_t y, size_t x)
 {
-	//printf("Checking position (%zu, %zu) - Cell: %c\n", y, x, temp->map[y][x]);
 	if (temp->map[y][x] == '1')
 		return (0);
 	if (temp->map[y][x] == 'C')
@@ -57,7 +56,6 @@ void	temp_map(t_game *game)
 	temp.height = game->height;
 	temp.width = game->width;
 	temp.chest = game->chest;
-	//printf("Chest number: %zu\n", temp.chest);
 	temp.player_x = game->player_x;
 	temp.player_y = game->player_y;
 	temp.exit = 0;
@@ -71,7 +69,6 @@ void	temp_map(t_game *game)
 		i++;
 	}
 	check_path(&temp, temp.player_y, temp.player_x);
-	//printf("Exit: %zu, Chest: %zu\n", temp.exit, temp.chest);
 	if (temp.exit != 1 || temp.chest != 0)
 		error_msg_params("No valid path available");
 	free_map(temp.map, temp.height);

@@ -6,7 +6,7 @@
 #    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/25 16:05:56 by jlu               #+#    #+#              #
-#    Updated: 2024/01/26 15:43:21 by jlu              ###   ########.fr        #
+#    Updated: 2024/02/02 13:49:42 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ PROJECT = so long
 NAME = so_long
 
 LIBFT = ./libft/libft.a
-MLX42 = ./MLX42/build/libmlx42.a
+MLX42 = ./MLX42/libmlx42.a
 
 SRC = ./functions/so_long.c \
 	  ./functions/path_check.c \
@@ -26,10 +26,13 @@ SRC = ./functions/so_long.c \
 	  ./functions/fill_map.c \
 	  ./functions/direction.c \
 	  ./functions/utils.c \
+	  ./functions/images_handler2.c \
+	  ./functions/monster_bonus.c \
+	  ./functions/screen_bonus.c \
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MLX42FLAGS = -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/josephlu/.brew/opt/glfw/lib/"
+MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
 #Color ANSI Code 
 BOLD   := \033[1m./SRC/

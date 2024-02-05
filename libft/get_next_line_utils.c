@@ -6,21 +6,11 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:16:00 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/25 19:12:46 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/04 18:15:31 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-//size_t	ft_gnl_strlen(const char *str)
-//{
-//	size_t	i;
-
-//	i = 0;
-//	while (str[i] != '\0')
-//		i++;
-//	return (i);
-//}
 
 int	ft_gnl_strchr(const char *s, int c)
 {
@@ -39,26 +29,6 @@ int	ft_gnl_strchr(const char *s, int c)
 	}
 	return (0);
 }
-
-//char	*ft_gnl_strdup(const char *str1)
-//{
-//	char	*strp;
-//	size_t	count;
-//	size_t	i;
-
-//	count = ft_strlen((char *)str1);
-//	strp = (char *)malloc((count + 1) * sizeof(char));
-//	if (!strp)
-//		return (NULL);
-//	i = 0;
-//	while (i < count)
-//	{
-//		strp[i] = str1[i];
-//		i++;
-//	}
-//	strp[i] = '\0';
-//	return (strp);
-//}
 
 char	*ft_gnl_strjoin(char *s1, char *s2)
 {

@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:27:22 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/25 18:32:22 by jlu              ###   ########.fr       */
+/*   Updated: 2024/01/31 14:12:28 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_memcmp(const void *str1, const void *str2, size_t n);
 size_t	ft_strlen(const char *str);
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+char	*ft_strcpy(char *dest, char *src);
 size_t	ft_strlcpy(char *dest, const char *src, size_t destsize);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);

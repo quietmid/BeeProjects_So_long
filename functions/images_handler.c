@@ -6,11 +6,13 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:59:01 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/23 14:57:48 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/04 17:49:59 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+// load wall, floor chest and exit_closed
 
 t_img	*load_wall_text(mlx_t *mlx_ptr, t_img *img)
 {
@@ -81,62 +83,3 @@ t_img	*load_exitclosed_text(mlx_t *mlx_ptr, t_img *img)
 	mlx_delete_texture(exit_closed);
 	return (img);
 }
-
-t_img	*load_exitopen_text(mlx_t *mlx_ptr, t_img *img)
-{
-	mlx_texture_t	*exit_open;
-
-	exit_open = mlx_load_png("./assets/Exit/door_anim_opening_f10.png");
-	if (!exit_open)
-		error_msg_params("Problem with png loading");
-	img->exit_open = mlx_texture_to_image(mlx_ptr, exit_open);
-	if (!img->exit_open)
-		error_msg_params("Problem with texture to image");
-	mlx_delete_texture(exit_open);
-	return (img);
-}
-
-t_img	*load_monster_text(mlx_t *mlx_ptr, t_img *img)
-{
-	mlx_texture_t	*monster_r;
-	mlx_texture_t	*monster_l;
-
-	monster_r = mlx_load_png("./assets/enemy/goblin_Right.png");
-	if (!monster_r)
-		error_msg_params("Problem with png loading");
-	img->monster_right = mlx_texture_to_image(mlx_ptr, monster_r);
-	if (!img->monster_right)
-		error_msg_params("Problem with texture to image");
-	mlx_delete_texture(monster_r);
-	monster_l = mlx_load_png("./assets/enemy/goblin_Left.png");
-	if (!monster_l)
-		error_msg_params("Problem with png loading");
-	img->monster_left = mlx_texture_to_image(mlx_ptr, monster_l);
-	if (!img->monster_left)
-		error_msg_params("Problem with texture to image");
-	mlx_delete_texture(monster_l);
-	return (img);
-}
-
-t_img	*load_player_text(mlx_t *mlx_ptr, t_img *img)
-{
-	mlx_texture_t	*player;
-	mlx_texture_t	*player_right;
-
-	player = mlx_load_png("./assets/hero/Hero.png");
-	if (!player)
-		error_msg_params("Problem with png loading");
-	img->player = mlx_texture_to_image(mlx_ptr, player);
-	if (!img->player)
-		error_msg_params("Problem with texture to image");
-	mlx_delete_texture(player);
-	player_right = mlx_load_png("./assets/hero/Walk_Right.png");
-	if (!player_right)
-		error_msg_params("Problem with png loading");
-	img->player = mlx_texture_to_image(mlx_ptr, player_right);
-	if (!img->player_right)
-		error_msg_params("Problem with texture to image");
-	mlx_delete_texture(player_right);
-	return (img);
-}
-

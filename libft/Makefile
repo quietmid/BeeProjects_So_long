@@ -6,7 +6,7 @@
 #    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 16:27:29 by jlu               #+#    #+#              #
-#    Updated: 2024/01/25 18:34:20 by jlu              ###   ########.fr        #
+#    Updated: 2024/01/31 14:12:43 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC = ft_atoi.c \
 	  ft_memset.c \
 	  ft_strchr.c \
 	  ft_strlcat.c \
+	  ft_strcpy.c \
 	  ft_strlcpy.c \
 	  ft_strlen.c \
 	  ft_strncmp.c \
@@ -83,6 +84,6 @@ clean:
 fclean: clean
 	rm -f $(NAME) 
 	
-re: fclean all 
+re: fclean all
 
 .PHONY: all clean fclean re bonus

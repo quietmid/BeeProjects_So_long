@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:26:07 by jlu               #+#    #+#             */
-/*   Updated: 2023/11/17 16:26:10 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/04 18:13:15 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
+	free((void *)s1);
 	return (str);
 }

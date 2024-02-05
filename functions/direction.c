@@ -6,83 +6,130 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:00:45 by jlu               #+#    #+#             */
-/*   Updated: 2024/01/26 18:50:23 by jlu              ###   ########.fr       */
+/*   Updated: 2024/02/04 17:00:53 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include "so_long.h"
 
-//void	remove_chest(t_game *game, int y, int x)
-//{
-//	int	chest_count;
+void	remove_chest(t_game *game, int y, int x)
+{
+	size_t	i;
 
-//	chest_count = 0;
-//	while (chest_count < game->img->chest_closed->count)
-//	{
-//		if (game->img->chest_closed->instances)
-//	}
-//}
-
-
-// draw the new image here
-	//mlx_image_to_window(game->mlx_ptr, game->img->player_right, 1, 2);
-	//only puts the new char at the top left corner
-	// might have to delete player image every time before and replace it
+	x = x * 32;
+	y = y * 32;
+	i = 0;
+	while (i < game->chest)
+	{
+		if (game->img->chest_closed->instances[i].x == x && \
+		game->img->chest_closed->instances[i].y == y)
+			game->img->chest_closed->instances[i].enabled = false;
+		i++;
+	}
+}
 
 t_game	*player_right(t_game *game)
 {
-	if (game->map[game->player_y][game->player_x + 1] != '1' && game->map[game->player_y][game->player_x + 1] != 'E')
+	clear_player(game);
+	game->img->player_right->enabled = true;
+	if (game->map[game->player_y][game->player_x + 1] != '1' && \
+	game->map[game->player_y][game->player_x +1] != 'E')
 	{
-		//if (game->map[game->player_y][game->player_x + 1] == 'C')
-		//{
-
-		//}
+		if (game->map[game->player_y][game->player_x + 1] == 'C')
+		{
+			remove_chest(game, game->player_y, game->player_x + 1);
+			game->map[game->player_y][game->player_x + 1] = '0';
+			game->collected += 1;
+		}
 		game->player_x += 1;
-		game->img->player = mlx_image_to_window(game->mlx_ptr, game->img->player_right, 1, 2);
-		game->img->player->instances[0].x += 1 * PIXELS;
+		game->img->player_right->instances[0].x += 1 * PIXELS;
+		game->img->player_up->instances[0].x += 1 * PIXELS;
+		game->img->player_left->instances[0].x += 1 * PIXELS;
+		game->img->player_down->instances[0].x += 1 * PIXELS;
+		game->img->player_die->instances[0].x += 1 * PIXELS;
 		game->steps += 1;
 	}
+	if (game->map[game->player_y][game->player_x + 1] == 'X')
+		check_touched(game);
+	check_game(game);
 	return (game);
 }
+
 t_game	*player_left(t_game *game)
 {
-	if (game->map[game->player_y][game->player_x - 1] != '1' && game->map[game->player_y][game->player_x - 1] != 'E')
+	clear_player(game);
+	game->img->player_left->enabled = true;
+	if (game->map[game->player_y][game->player_x - 1] != '1' && \
+	game->map[game->player_y][game->player_x - 1] != 'E')
 	{
-		//if (game->map[game->player_y][game->player_x + 1] == 'C')
-		//{
-
-		//}
+		if (game->map[game->player_y][game->player_x - 1] == 'C')
+		{
+			remove_chest(game, game->player_y, game->player_x - 1);
+			game->map[game->player_y][game->player_x - 1] = '0';
+			game->collected += 1;
+		}
 		game->player_x -= 1;
-		game->img->player->instances[0].x -= 1 * PIXELS;
+		game->img->player_left->instances[0].x -= 1 * PIXELS;
+		game->img->player_down->instances[0].x -= 1 * PIXELS;
+		game->img->player_up->instances[0].x -= 1 * PIXELS;
+		game->img->player_right->instances[0].x -= 1 * PIXELS;
+		game->img->player_die->instances[0].x -= 1 * PIXELS;
 		game->steps += 1;
 	}
+	if (game->map[game->player_y][game->player_x - 1] == 'X')
+		check_touched(game);
+	check_game(game);
 	return (game);
 }
+
 t_game	*player_down(t_game *game)
 {
-	if (game->map[game->player_y + 1][game->player_x] != '1' && game->map[game->player_y + 1][game->player_x] != 'E')
+	clear_player(game);
+	game->img->player_down->enabled = true;
+	if (game->map[game->player_y + 1][game->player_x] != '1' && \
+	game->map[game->player_y + 1][game->player_x] != 'E')
 	{
-		//if (game->map[game->player_y][game->player_x + 1] == 'C')
-		//{
-
-		//}
+		if (game->map[game->player_y + 1][game->player_x] == 'C')
+		{
+			remove_chest(game, game->player_y + 1, game->player_x);
+			game->map[game->player_y + 1][game->player_x] = '0';
+			game->collected += 1;
+		}
 		game->player_y += 1;
-		game->img->player->instances[0].y += 1 * PIXELS;
+		game->img->player_down->instances[0].y += 1 * PIXELS;
+		game->img->player_up->instances[0].y += 1 * PIXELS;
+		game->img->player_right->instances[0].y += 1 * PIXELS;
+		game->img->player_left->instances[0].y += 1 * PIXELS;
+		game->img->player_die->instances[0].y += 1 * PIXELS;
 		game->steps += 1;
 	}
+	if (game->map[game->player_y + 1][game->player_x])
+		check_touched(game);
+	check_game(game);
 	return (game);
 }
+
 t_game	*player_up(t_game *game)
 {
-	if (game->map[game->player_y - 1][game->player_x] != '1' && game->map[game->player_y - 1][game->player_x] != 'E')
+	clear_player(game);
+	game->img->player_up->enabled = true;
+	if (game->map[game->player_y - 1][game->player_x] != '1' && \
+	game->map[game->player_y - 1][game->player_x] != 'E')
 	{
-		//if (game->map[game->player_y][game->player_x + 1] == 'C')
-		//{
-
-		//}
+		if (game->map[game->player_y - 1][game->player_x] == 'C')
+		{
+			remove_chest(game, game->player_y - 1, game->player_x);
+			game->map[game->player_y - 1][game->player_x] = '0';
+			game->collected += 1;
+		}
 		game->player_y -= 1;
-		game->img->player->instances[0].y -= 1 * PIXELS;
+		game->img->player_up->instances[0].y -= 1 * PIXELS;
+		game->img->player_down->instances[0].y -= 1 * PIXELS;
+		game->img->player_right->instances[0].y -= 1 * PIXELS;
+		game->img->player_left->instances[0].y -= 1 * PIXELS;
+		game->img->player_die->instances[0].y -= 1 * PIXELS;
 		game->steps += 1;
 	}
+	check_game(game);
 	return (game);
 }
