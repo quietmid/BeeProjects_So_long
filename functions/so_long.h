@@ -47,12 +47,6 @@ typedef struct s_var
 	int	idx_y;
 }		t_var;
 
-typedef struct s_coord
-{
-	int	x;
-	int	y;
-}		t_coord;
-
 typedef struct s_img
 {
 	mlx_image_t	*wall;
@@ -78,7 +72,6 @@ typedef struct s_img
 typedef struct s_game
 {
 	char	**map; // the map pointer 2D array
-	size_t	player;
 	size_t	exit;
 	size_t	steps;
 	size_t	chest;	// the # of chest
