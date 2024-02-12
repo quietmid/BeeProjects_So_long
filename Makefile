@@ -61,7 +61,7 @@ $(LIBFT):
 		@$(MAKE) -C ./libft
 
 $(MLX42):
-		@$(MAKE) -C ./MLX42
+		@$(MAKE) -C ./MLX42/build -j4
 
 $(OBJECTS_DIR)/%.o: ./functions/%.c
 		@mkdir -p $(OBJECTS_DIR)
