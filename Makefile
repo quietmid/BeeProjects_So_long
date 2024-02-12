@@ -73,7 +73,7 @@ clean:
 		@$(MAKE) clean -C ./libft
 		@$(MAKE) clean -C ./MLX42/build
 		@rm -rf $(OBJECTS_DIR)/*.o
-		@if [ -f "$(OBJECTS_DIR)" ]; then rmdir -p $(OBJECTS_DIR); fi
+		@rm -rf obj
 		@echo "$(WHITE) $(OBJECTS_DIR) $(GREEN) REMOVED"
 
 fclean: clean
