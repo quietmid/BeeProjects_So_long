@@ -26,9 +26,6 @@ t_game	*initialzing_game_struct(char **map_array)
 	game->collected = 0;
 	game->condition = 0;
 	game->monster = count_monster(game);
-	game->collected = 0;
-	game->condition = 0;
-	game->monster = count_monster(game);
 	game->chest = count_chests(game);
 	game->player_x = get_player_pos(game, 'x');
 	game->player_y = get_player_pos(game, 'y');
