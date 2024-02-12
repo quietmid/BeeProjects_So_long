@@ -25,17 +25,6 @@ void	check_map_len(char **map)
 			error_msg_params("Come On! Give me a Rectangle");
 		i++;
 	}
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	len = ft_strlen(map[i]);
-	while (map[i] != NULL)
-	{
-		if (ft_strlen(map[i]) != len)
-			error_msg_params("Come On! Give me a Rectangle");
-		i++;
-	}
 }
 
 void	check_wall(t_game *game)
