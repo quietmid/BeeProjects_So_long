@@ -14,8 +14,6 @@
 
 // load wall, floor chest and exit_closed
 
-// load wall, floor chest and exit_closed
-
 t_img	*load_wall_text(mlx_t *mlx_ptr, t_img *img)
 {
 	mlx_texture_t	*wall;
