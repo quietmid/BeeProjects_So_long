@@ -52,9 +52,7 @@ int	main(int argc, char **argv)
 	fill_map(game);
 	render_map(game);
 	bonus_to_window(game);
-	bonus_to_window(game);
 	mlx_key_hook(game->mlx_ptr, move_hook, game);
-	mlx_loop_hook(game->mlx_ptr, monster_patrol, game);
 	mlx_loop_hook(game->mlx_ptr, monster_patrol, game);
 	mlx_loop(game->mlx_ptr);
 	mlx_terminate(game->mlx_ptr);
