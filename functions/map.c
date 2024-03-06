@@ -70,6 +70,8 @@ void	check_map_content(char *map)
 		else if (map[i] != '0' && map[i] != '1' && map[i] != '\n' \
 		&& map[i] != '\0' && map[i] != 'X')
 			error_msg_params("An illegal Char has been found");
+		else if (map[i] == '\n' && map[i + 1] == '\n')
+			error_msg_params("Invalid Map");
 	}
 	if (exit != 1 || player != 1 || chest < 1)
 		error_msg_params("Invalid Map, # of Player, chest, or exit is wrong");
