@@ -44,5 +44,6 @@ See that the excutable so_long is present then call the program with
 ```
   ./so_long maps/midMap.ber
 ```
+Then you can play!
 
 
