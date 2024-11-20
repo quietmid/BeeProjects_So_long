@@ -6,15 +6,15 @@
 #    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/25 16:05:56 by jlu               #+#    #+#              #
-#    Updated: 2024/02/02 13:49:42 by jlu              ###   ########.fr        #
+#    Updated: 2024/11/20 12:21:18 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PROJECT = so long
+# PROJECT = so long
 NAME = so_long
 
 LIBFT = ./libft/libft.a
-MLX42 = ./MLX42/libmlx42.a
+MLX42 = ./MLX42/build/libmlx42.a
 
 SRC = ./functions/so_long.c \
 	  ./functions/path_check.c \
@@ -33,6 +33,8 @@ SRC = ./functions/so_long.c \
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+LIBMLX_DIR		=	./MLX42
+LIBMLX			=	$(LIBMLX_DIR)/build/libmlx42.a
 
 #Color ANSI Code 
 BOLD   := \033[1m./SRC/
@@ -48,7 +50,26 @@ RESET     := \x1b[0m
 OBJECTS_DIR = obj
 OBJECTS = $(addprefix $(OBJECTS_DIR)/,$(notdir $(SRC:.c=.o)))
 
-all: $(NAME)
+clone_mlx42:
+	if [ ! -d "$(LIBMLX_DIR)" ]; then \
+		echo "Cloning MLX42..."; \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX_DIR); \
+	fi
+
+# libmlx: clone_mlx42
+# 	if [ ! -d "$(LIBMLX_DIR)/build" ]; then \
+# 		cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build; \
+# 	fi
+# 	@make -C $(LIBMLX_DIR)/build -j4
+
+libmlx: clone_mlx42
+	if [ ! -d "$(LIBMLX_DIR)/build" ]; then \
+		echo "Running cmake for MLX42..."; \
+    	cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build; \
+    fi
+	@make -C $(LIBMLX_DIR)/build -j4
+
+all: libmlx $(NAME)
 
 $(NAME): $(LIBFT) $(MLX42) $(OBJECTS)
 		@echo "Compiled with $(BLUE)$(CFLAGS)$(RESET)"
@@ -71,17 +92,23 @@ $(OBJECTS_DIR)/%.o: ./functions/%.c
 
 clean:
 		@$(MAKE) clean -C ./libft
-		@$(MAKE) clean -C ./MLX42/build
+		@if [ -d "$(LIBMLX_DIR)/build" ]; then \
+        	$(MAKE) clean -C $(LIBMLX_DIR)/build; \
+    	fi
+		# @$(MAKE) clean -C ./MLX42/build
 		@rm -rf $(OBJECTS_DIR)/*.o
 		@rm -rf obj
 		@echo "$(WHITE) $(OBJECTS_DIR) $(GREEN) REMOVED"
 
 fclean: clean
 		@$(MAKE) fclean -C ./libft
-		@$(MAKE) clean -C ./MLX42/build
+		# @$(MAKE) clean -C ./MLX42/build
+		@if [ -d "$(LIBMLX_DIR)/build" ]; then \
+    		$(MAKE) clean -C $(LIBMLX_DIR)/build; \
+    	fi
 		@rm -rf $(NAME)
 		@echo "$(WHITE) $(PROJECT) $(RESET) $(GREEN) SO CLEANED"
 
 re: fclean all
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re
