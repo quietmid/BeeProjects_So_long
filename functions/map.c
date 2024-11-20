@@ -109,9 +109,7 @@ t_game	*check_map(char *mapfile)
 	char	*map_str;
 	char	**map_array;
 	t_game	*data;
-	int		i;
 
-	i = 0;
 	map_str = get_map_str(mapfile);
 	if (map_str == NULL)
 		error_msg_params("Empty Map");
