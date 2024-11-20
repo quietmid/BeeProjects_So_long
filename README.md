@@ -27,6 +27,22 @@ Similar to other projects, I first checked for errors, such as # of arugments, t
 After we make sure the map is valid, we then uses the MLX42 library to allocate memories to the PNG files, assign them to the corresponding variables, fill and render the map according the map file. \
 In input managment, I use the MLX_KEY function and check if the the direction that the player is moving in is not `1` or `E` (Wall or Exit), if it is not, then it checks if a chest is present. If a chest is present, my code runs through all the location of the chests on the map and finds the one that my player is standing on and disable the image of that one. Finally, after each move, I check the game status to see if the game winning condition is reached, if it is reached, I turn the exit into `0` and when the player's location matches the exit location, the game ends. 
 
-<h3>Tp Play</h3>
+<h3>To Play</h3>
+
+Git clone the repo and cd into the folder
+```
+  git clone https://github.com/quietmid/BeeProjects_So_long.git yourOwnFolderName
+  cd yourOwnFolderName
+```
+
+Compile the program by make
+```
+  make
+```
+
+See that the excutable so_long is present then call the program with 
+```
+  ./so_long maps/midMap.ber
+```
 
 
