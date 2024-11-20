@@ -79,7 +79,7 @@ typedef struct s_game
 
 //utils functions
 void	error_msg_params(char *msg);
-void	terminate_game(t_game *game);
+// void	terminate_game(t_game *game);
 
 //map functions
 t_game	*check_map(char *mapfile);
