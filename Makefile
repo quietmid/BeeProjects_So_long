@@ -51,8 +51,9 @@ OBJECTS_DIR = obj
 OBJECTS = $(addprefix $(OBJECTS_DIR)/,$(notdir $(SRC:.c=.o)))
 
 clone_mlx42:
-	if [ ! -d "$(LIBMLX_DIR)" ]; then \
+	if [ ! -d "$(LIBMLX_DIR)/.git" ]; then \
 		echo "Cloning MLX42..."; \
+		rm -rf $(LIBMLX_DIR); \
 		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX_DIR); \
 	fi
 
