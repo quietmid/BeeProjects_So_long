@@ -8,7 +8,7 @@ The school that I am at, Hive Helsinki, allows us to use MLX42 instead of Minili
 
 ## Example
 <h4>Gameplay with Monster</h4>
-<img src="https://i.imgur.com/PBWpSSz.gif">
+<img src="https://i.imgur.com/x80L7T1.gif" width="400">
 
 ## Core Features:
 - Event handling with the movement input
