@@ -43,8 +43,10 @@ Git clone the repo and cd into the folder
 Check if there is a MLX42 folder already in the folder if there is then delete the MLX42 folder
 
 Compile the program by make and make re
+it needs the make re to compile
 ```
   make
+  make re
 ```
 
 See that the excutable so_long is present then call the program with 
