@@ -7,8 +7,9 @@ Through this project, I was introduced to the basic of window management, event 
 The school that I am at, Hive Helsinki, allows us to use MLX42 instead of MinilibX. </p>
 
 ## Example
-<h4>Gameplay with Monster</h4>h4
+<h4>Gameplay with Monster</h4>
 <img src="https://i.imgur.com/PBWpSSz.gif" >
+
 ## Core Features:
 - Event handling with the movement input
 - textures and images 
